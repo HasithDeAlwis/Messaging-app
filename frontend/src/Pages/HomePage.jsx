@@ -1,11 +1,10 @@
 import React from "react";
-import loginCard from "../Components/loginCard";
+import LoginCard from "../Components/LoginCard";
 
 const HomePage = () => {
   return (
-    <div>
-      Hello
-      <loginCard />
+    <div className="container">
+      <LoginCard />
     </div>
   );
 };
