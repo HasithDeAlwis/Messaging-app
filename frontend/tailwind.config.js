@@ -10,6 +10,11 @@ module.exports = {
         pink: "9c8481",
         brown: "#4b3b42",
       },
+
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        kanit: ["Kanit", "sans-serif"],
+      },
     },
   },
   plugins: [],
