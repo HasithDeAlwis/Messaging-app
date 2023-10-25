@@ -1,7 +1,13 @@
 import React from "react";
+import loginCard from "../Components/loginCard";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      Hello
+      <loginCard />
+    </div>
+  );
 };
 
 export default HomePage;
