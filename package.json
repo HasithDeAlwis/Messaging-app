@@ -1,0 +1,14 @@
+{
+  "name": "chat-with-friends",
+  "version": "1.0.0",
+  "description": "A messaging app where you can message your friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hasith De Alwis",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
