@@ -9,7 +9,7 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
@@ -60,7 +60,6 @@ const Login = () => {
       history.push("/chats");
       return;
     } catch (error) {
-      console.log(error);
       toast({
         title: "Error Occured!!",
         status: "error",

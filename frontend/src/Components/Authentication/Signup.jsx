@@ -9,9 +9,9 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
-
 import { useHistory } from "react-router-dom";
+
+import axios from "axios";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -20,8 +20,8 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
+  const history = useHistory();
   const toast = useToast();
 
   const submitHandler = async () => {
@@ -54,10 +54,9 @@ const Signup = () => {
           "Content-type": "application/json",
         },
       };
-      console.log(name);
       const { data } = await axios.post(
         "/api/user/",
-        { name, email, password, pic },
+        { name, email, password },
         config
       );
       toast({
@@ -70,9 +69,7 @@ const Signup = () => {
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-
-      history.pushState("/chats");
-      return;
+      history.push("/chats");
     } catch (error) {
       toast({
         title: "Error Occured!",
