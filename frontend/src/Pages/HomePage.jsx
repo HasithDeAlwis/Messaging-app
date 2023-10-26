@@ -23,6 +23,7 @@ const HomePage = () => {
       history.push("/chats");
     }
   }, [history]);
+
   return (
     <Container maxW="xl" centerContent>
       <Box
