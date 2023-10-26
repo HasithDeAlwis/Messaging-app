@@ -14,34 +14,30 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-
+import { Spinner } from "@chakra-ui/spinner";
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
 } from "@chakra-ui/react";
 
 import ChatLoading from "./ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
 import axios from "axios";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import { px } from "framer-motion";
 
 import { ChatState } from "../../Context/ChatProvider";
 import ProfileModal from "../Miscellaneous/ProfileModal";
 import { useHistory } from "react-router-dom";
-import { config } from "dotenv";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState();
-  const { user } = ChatState();
+  const { user, setSelectedChat, chats, setChats } = ChatState();
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -77,6 +73,37 @@ const SideDrawer = () => {
       setSearchResult(data);
     } catch (error) {
       toast({
+        title: "Error Occured!",
+        description: "Failed to Load the Search Results",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+  };
+
+  const accessChat = async (userId) => {
+    try {
+      setLoadingChat(true);
+
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      const { data } = await axios.post("/api/chat", { userId }, config);
+
+      if (!chats.find((c) => c._id === data.id)) {
+        setChats([data, ...chats]);
+      }
+      setSelectedChat(data);
+      setLoadingChat(false);
+      onClose();
+    } catch (error) {
+      toast({
         title: "Search Result Went Wrong",
         description: "Failed to Lead the Search Results",
         status: "error",
@@ -86,27 +113,6 @@ const SideDrawer = () => {
       });
     }
   };
-
-  const accessChat = async (userId) => {
-try {
-  setLoadingChat(true);
-
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${user.token}`;
-    },
-  };
-
-  const {data} = await axios.post("/api/chat", {userId}, config)
-  setLoading(false);
-  setSelectedChat(data);
-  setLoadingChat(false);
-  onClose()
-} catch (error) {
-  
-}
-  }
 
   return (
     <>
@@ -162,7 +168,7 @@ try {
           <DrawerBody>
             <Box display="flex" pb={2}>
               <Input
-                placeHolder="Search by name or email"
+                placeholder="Search by name or email"
                 mr={2}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -173,9 +179,11 @@ try {
               <ChatLoading />
             ) : (
               searchResult?.map((user) => (
-                <UserListItem key={user.id} user={user} onClick={accessChat}/>
+                <UserListItem key={user._id} user={user} onClick={accessChat} />
               ))
             )}
+
+            {loadingChat && <Spinner ml="auto" display="flex" />}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
