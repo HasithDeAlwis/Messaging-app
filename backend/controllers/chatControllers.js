@@ -6,24 +6,24 @@ const accessChat = expressAsyncHandler(async (req, res) => {
   const { userId } = req.body;
 
   if (!userId) {
-    console.log("UserID param not sent with request");
+    console.log("UserId param not sent with request");
     return res.sendStatus(400);
   }
-
+  console.log(req.user._id);
   var isChat = await Chat.find({
-    isGroupChat: false,
     $and: [
-      { users: { $elemMatch: { $eq: req.user._id } } },
-      { users: { $elemMatch: { $eq: userId } } },
+      { users: { $elemMatch: { $eq: req.user._id.toString() } } },
+      { users: { $elemMatch: { $eq: userId.toString() } } },
     ],
   })
     .populate("users", "-password")
     .populate("latestMessage");
+
   isChat = await User.populate(isChat, {
     path: "latestMessage.sender",
     select: "name pic email",
   });
-
+  console.log(isChat.length);
   if (isChat.length > 0) {
     res.send(isChat[0]);
   } else {
@@ -32,16 +32,16 @@ const accessChat = expressAsyncHandler(async (req, res) => {
       isGroupChat: false,
       users: [req.user._id, userId],
     };
+
     try {
       const createdChat = await Chat.create(chatData);
-
       const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
         "users",
         "-password"
       );
-      res.status(200).send(FullChat);
+      res.status(200).json(FullChat);
     } catch (error) {
-      res.send(401);
+      res.status(400);
       throw new Error(error.message);
     }
   }
