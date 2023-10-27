@@ -84,10 +84,23 @@ const MyChats = ({ fetchAgain }) => {
                 key={chat._id}
               >
                 <Text fontFamily="Poppins">
-                  {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
+                  {getSender(loggedUser, chat.users)}
                 </Text>
+                {chat.latestMessage ? (
+                  <>
+                    <Text
+                      fontFamily="Poppins"
+                      fontSize="small"
+                      fontWeight="bold"
+                    >
+                      {chat.latestMessage.sender.name}
+                      {":   "}
+                      {chat.latestMessage.content}
+                    </Text>
+                  </>
+                ) : (
+                  <></>
+                )}
               </Box>
             ))}
           </Stack>
