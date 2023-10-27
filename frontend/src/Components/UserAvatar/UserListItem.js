@@ -13,7 +13,7 @@ const UserListItem = ({ user, handleFunction }) => {
       }}
       w="100%"
       display="flex"
-      alignItmes="center"
+      alignItems="center"
       color="black"
       px={3}
       py={2}
