@@ -67,6 +67,9 @@ const Signup = () => {
         position: "bottom",
       });
 
+      let jsonData = await JSON.stringify(data);
+      localStorage.setItem("userInfo", jsonData);
+      jsonData = null;
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
       history.push("/chats");

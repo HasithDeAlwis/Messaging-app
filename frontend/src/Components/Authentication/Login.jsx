@@ -55,7 +55,9 @@ const Login = () => {
         isClosable: true,
         position: "bottom",
       });
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      let jsonData = await JSON.stringify(data);
+      localStorage.setItem("userInfo", jsonData);
+      jsonData = null;
       setLoading(false);
       history.push("/chats");
       return;

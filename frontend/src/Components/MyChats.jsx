@@ -33,7 +33,7 @@ const MyChats = ({ fetchAgain }) => {
     console.log("ehhlo");
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchAgain]);
   return (
     <Box
