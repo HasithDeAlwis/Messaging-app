@@ -4,7 +4,7 @@ import { Box, Stack, useToast, Text } from "@chakra-ui/react";
 import ChatLoading from "../Components/Miscellaneous/ChatLoading";
 import axios from "axios";
 import { getSender } from "../config/ChatLogics";
-const MyChats = () => {
+const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
   const toast = useToast();
@@ -30,9 +30,11 @@ const MyChats = () => {
     }
   };
   useEffect(() => {
+    console.log("ehhlo");
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-  }, []);
+    // eslint-disable-next-line
+  }, [fetchAgain]);
   return (
     <Box
       d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
@@ -95,5 +97,4 @@ const MyChats = () => {
     </Box>
   );
 };
-
 export default MyChats;

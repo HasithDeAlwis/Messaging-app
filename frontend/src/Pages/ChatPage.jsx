@@ -9,10 +9,10 @@ import { useHistory } from "react-router-dom";
 const ChatPage = () => {
   const history = useHistory();
   const { user } = ChatState();
-
+  const [fetchAgain, setFetchAgain] = useState(false);
   return (
     <div style={{ width: "100%" }}>
-      <SideDrawer />
+      {user && <SideDrawer />}
       <Box
         display="flex"
         justifyContent="space-between"
@@ -20,8 +20,10 @@ const ChatPage = () => {
         h="95vh"
         p={10}
       >
-        {user && <MyChats />}
-        {user && <ChatBox />}
+        {user && <MyChats fetchAgain={fetchAgain} />}
+        {user && (
+          <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        )}
       </Box>
     </div>
   );

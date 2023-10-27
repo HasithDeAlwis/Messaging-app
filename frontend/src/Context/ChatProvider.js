@@ -16,14 +16,15 @@ const ChatProvider = ({ children }) => {
     setUser(userInfo);
 
     if (!userInfo) history.push("/");
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history]);
 
   return (
     <ChatContext.Provider
       value={{
-        user,
         selectedChat,
         setSelectedChat,
+        user,
         setUser,
         notification,
         setNotification,
