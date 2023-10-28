@@ -43,7 +43,7 @@ const Login = () => {
       };
 
       const { data } = await axios.post(
-        "https://chatathon-backend.onrender.com/user/login",
+        "https://chatathon-backend.onrender.com/api/user/login",
         { email, password },
         config
       );
