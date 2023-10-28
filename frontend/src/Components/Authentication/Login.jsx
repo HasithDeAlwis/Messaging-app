@@ -38,6 +38,7 @@ const Login = () => {
     try {
       const config = {
         headers: {
+          "Access-Control-Allow-Origin": "https://chatathon.onrender.com",
           "Content-type": "application/json",
         },
       };
