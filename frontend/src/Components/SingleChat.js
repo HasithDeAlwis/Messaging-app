@@ -10,7 +10,9 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./Miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 import { ChatState } from "../Context/ChatProvider";
+
 import io from "socket.io-client";
+
 import Lottie from "lottie-react";
 import typingAnimation from "../Animations/typing.json";
 const ENDPOINT = "http://localhost:3000";
@@ -96,7 +98,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         }
       } else {
         setMessages([...messages, newMessageRecieved]);
-        setFetchAgain(!fetchAgain);
+        setFetchAgain((prevFetch) => !prevFetch);
       }
     });
   });

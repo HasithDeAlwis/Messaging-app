@@ -54,6 +54,7 @@ const authUser = expressAsyncHandler(async (req, res) => {
     throw new Error("Invalid Email or Password");
   }
 });
+
 // /api/user?search
 const allUsers = asyncHandler(async (req, res) => {
   const keyword = req.query.search

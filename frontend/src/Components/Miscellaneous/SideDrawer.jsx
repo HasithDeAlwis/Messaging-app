@@ -106,8 +106,6 @@ const SideDrawer = () => {
 
       if (!chats.some((c) => c._id === data._id)) {
         setChats([data, ...chats]);
-      } else {
-        console.log("what...");
       }
       setSelectedChat(data);
       setLoadingChat(false);
