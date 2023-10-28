@@ -36,11 +36,7 @@ const io = require("socket.io")(server, {
   },
 });
 
-app.use(
-  cors({
-    origin: process.env.HOST,
-  })
-);
+app.use(cors());
 
 io.on("connection", (socket) => {
   console.log("connected to socket.io");
