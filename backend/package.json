@@ -4,7 +4,7 @@
   "description": "A messaging app where you can message your friends",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+    "start": "nodemon server.js"
   },
   "author": "Hasith De Alwis",
   "license": "ISC",
