@@ -7,6 +7,8 @@ const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const cors = require("cors");
+
 dotenv.config();
 
 connectDB();
@@ -33,6 +35,12 @@ const io = require("socket.io")(server, {
     origin: process.env.HOST,
   },
 });
+
+app.use(
+  cors({
+    origin: process.env.HOST,
+  })
+);
 
 io.on("connection", (socket) => {
   console.log("connected to socket.io");
