@@ -13,6 +13,8 @@ dotenv.config();
 
 connectDB();
 
+app.use(cors());
+
 app.use(express.json()); //to accept JSON data
 
 app.get("/", (req, res) => {
@@ -35,8 +37,6 @@ const io = require("socket.io")(server, {
     origin: process.env.HOST,
   },
 });
-
-app.use(cors());
 
 io.on("connection", (socket) => {
   console.log("connected to socket.io");
