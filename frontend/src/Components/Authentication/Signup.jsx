@@ -55,7 +55,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/user/",
+        "https://chatathon-backend.onrender.com/api/user/",
         { name, email, password },
         config
       );

@@ -76,7 +76,10 @@ const SideDrawer = () => {
       };
       console.log("test");
 
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(
+        `https://chatathon-backend.onrender.com/api/user?search=${search}`,
+        config
+      );
 
       setLoading(false);
       setSearchResult(data);
@@ -102,7 +105,11 @@ const SideDrawer = () => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post("/api/chat", { userId }, config);
+      const { data } = await axios.post(
+        "https://chatathon-backend.onrender.com/api/chat",
+        { userId },
+        config
+      );
 
       if (!chats.some((c) => c._id === data._id)) {
         setChats([data, ...chats]);
